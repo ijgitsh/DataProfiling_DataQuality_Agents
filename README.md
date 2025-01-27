@@ -31,14 +31,7 @@ A Python-based workflow for profiling data and assessing data quality in SQLite 
 ---
 
 ## Project Structure
-├── database.db # SQLite database used for profiling 
-├── dataset.csv # Sample dataset to load into SQLite 
-├── profile.yaml # Profiling SQL queries output 
-├── dq.yaml # Data quality queries output 
-├── results.yaml # Query results output 
-├── report.md # Final Markdown report 
-├── dq_profile.py # Main script
-└── README.md # This file
+├── database.db # SQLite database used for profiling ├── dataset.csv # Sample dataset to load into SQLite ├── profile.yaml # Profiling SQL queries output ├── dq.yaml # Data quality queries output ├── results.yaml # Query results output ├── report.md # Final Markdown report ├── dq_profile.py # Main script └── README.md # This file
 
 
 ---
@@ -54,7 +47,7 @@ Install the required dependencies:
 pip install pandas sqlite3 crewai openai
 ```
 
-###Environment Variables
+### Environment Variables
 Set up the OpenAI API Key as an environment variable:
 ```bash
 export OPENAI_API_KEY="your_openai_api_key"
@@ -62,7 +55,7 @@ export OPENAI_API_KEY="your_openai_api_key"
 
 ##How to Use
 
-###Step 1: Prepare the SQLite Database
+### Step 1: Prepare the SQLite Database
 
 Convert your CSV file to an SQLite database:
 ```bash
@@ -76,7 +69,7 @@ def create_sqlite_db(csv_path: str, db_path: str):
     conn.close()
 ```
 
-###Step 2: Run the Workflow
+### Step 2: Run the Workflow
 
 Execute the workflow by running the dq_profile.py script:
 ```bash
@@ -90,18 +83,18 @@ The process includes:
 4-Formatting results into a Markdown report.
 
 
-##Extending the Workflow
+## Extending the Workflow
 
-###Add Custom Tools:
+### Add Custom Tools:
 
 -Integrate other data tools into CrewAI by creating custom tool classes like SQLiteSchemaTool and SQLiteQueryTool.
 -Scale to Other Databases: Adapt the schema and query tools for other database systems (e.g., PostgreSQL, MySQL).
 -Enhance Reporting: Include additional visualizations or summaries using libraries like matplotlib or seaborn.
 
 
-##Contributing
+## Contributing
 Feel free to fork this repository and create a pull request with your improvements. Contributions are always welcome!
 
-##License
+## License
 This project is licensed under the MIT License. See the LICENSE file for details.
 

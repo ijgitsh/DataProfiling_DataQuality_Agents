@@ -31,21 +31,21 @@ A Python-based workflow for profiling data and assessing data quality in SQLite 
 ---
 
 ## Project Structure
-|- database.db # SQLite database used for profiling \n
+├── database.db # SQLite database used for profiling 
 
-|- dataset.csv # Sample dataset to load into SQLite \n
+├── dataset.csv # Sample dataset to load into SQLite 
 
-|- profile.yaml # Profiling SQL queries output 
+├── profile.yaml # Profiling SQL queries output 
 
-|- dq.yaml # Data quality queries output 
+├── dq.yaml # Data quality queries output 
 
-|- results.yaml # Query results output 
+├── results.yaml # Query results output 
 
-|- report.md # Final Markdown report 
+├── report.md # Final Markdown report 
 
-|- dq_profile.py # Main script 
+├── dq_profile.py # Main script 
 
-|_ README.md # This file
+└── README.md # This file
 
 
 ---

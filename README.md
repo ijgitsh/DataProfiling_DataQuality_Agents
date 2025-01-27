@@ -87,7 +87,7 @@ def create_sqlite_db(csv_path: str, db_path: str):
 
 Execute the workflow by running the dq_profile.py script:
 ```bash
-python dq_profiling.py
+python dq_profile.py
 ```
 The process includes:
 

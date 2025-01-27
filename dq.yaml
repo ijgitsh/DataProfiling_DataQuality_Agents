@@ -1,0 +1,11 @@
+```sql
+1. SELECT COUNT(*) AS Null_IDs FROM data_table WHERE ID IS NULL, COUNT(*) AS Null_Names FROM data_table WHERE Name IS NULL, COUNT(*) AS Null_Ages FROM data_table WHERE Age IS NULL, COUNT(*) AS Null_Salaries FROM data_table WHERE Salary IS NULL, COUNT(*) AS Null_JoinDates FROM data_table WHERE JoinDate IS NULL, COUNT(*) AS Null_Departments FROM data_table WHERE Department IS NULL;
+
+2. SELECT ID, Name, Age, Salary, JoinDate, Department, COUNT(*) AS Count FROM data_table GROUP BY ID, Name, Age, Salary, JoinDate, Department HAVING COUNT(*) > 1;
+
+3. WITH AgeStats AS (SELECT PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY Age) AS Q1, PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY Age) AS Q3 FROM data_table), SalaryStats AS (SELECT PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY Salary) AS Q1, PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY Salary) AS Q3 FROM data_table), AgeOutliers AS (SELECT * FROM data_table, AgeStats WHERE Age < (Q1 - 1.5 * (Q3 - Q1)) OR Age > (Q3 + 1.5 * (Q3 - Q1))), SalaryOutliers AS (SELECT * FROM data_table, SalaryStats WHERE Salary < (Q1 - 1.5 * (Q3 - Q1)) OR Salary > (Q3 + 1.5 * (Q3 - Q1))) SELECT * FROM AgeOutliers UNION ALL SELECT * FROM SalaryOutliers;
+
+4. SELECT COUNT(*) AS Invalid_Ages FROM data_table WHERE Age < 0 OR Age > 120, COUNT(*) AS Invalid_Salaries FROM data_table WHERE Salary < 0 OR Salary > 1000000, COUNT(*) AS Invalid_Departments FROM data_table WHERE Department NOT IN ('Engineering', 'HR', 'Marketing', 'Sales', 'Unknown');
+
+5. SELECT d.Department AS Invalid_Department FROM data_table d LEFT JOIN Departments dept ON d.Department = dept.DepartmentName WHERE dept.DepartmentName IS NULL;
+```

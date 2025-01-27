@@ -1,0 +1,103 @@
+1. Counting total number of records for each column:
+```sql
+SELECT 
+    COUNT(ID) AS total_ID,
+    COUNT(Name) AS total_Name,
+    COUNT(Age) AS total_Age,
+    COUNT(Salary) AS total_Salary,
+    COUNT(JoinDate) AS total_JoinDate,
+    COUNT(Department) AS total_Department
+FROM data_table;
+```
+
+2. Summarizing categorical columns (Department):
+```sql
+SELECT 
+    Department,
+    COUNT(*) AS count,
+    COUNT(DISTINCT Department) AS distinct_count,
+    ROUND(COUNT(DISTINCT Department) * 100.0 / COUNT(*), 2) AS unique_percentage,
+    MIN(LENGTH(Department)) AS min_length,
+    MAX(LENGTH(Department)) AS max_length,
+    AVG(LENGTH(Department)) AS mean_length
+FROM data_table
+GROUP BY Department;
+```
+
+3. Calculating basic statistics for numerical columns (Age, Salary):
+```sql
+SELECT 
+    AVG(Age) AS mean_age,
+    MIN(Age) AS min_age,
+    MAX(Age) AS max_age,
+    PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY Age) AS median_age,
+    AVG(Salary) AS mean_salary,
+    MIN(Salary) AS min_salary,
+    MAX(Salary) AS max_salary,
+    PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY Salary) AS median_salary
+FROM data_table;
+```
+
+4. Identify missing values (NULLs) in each column:
+```sql
+SELECT 
+    COUNT(*) AS total_rows,
+    SUM(CASE WHEN ID IS NULL THEN 1 ELSE 0 END) AS null_ID,
+    SUM(CASE WHEN Name IS NULL THEN 1 ELSE 0 END) AS null_Name,
+    SUM(CASE WHEN Age IS NULL THEN 1 ELSE 0 END) AS null_Age,
+    SUM(CASE WHEN Salary IS NULL THEN 1 ELSE 0 END) AS null_Salary,
+    SUM(CASE WHEN JoinDate IS NULL THEN 1 ELSE 0 END) AS null_JoinDate,
+    SUM(CASE WHEN Department IS NULL THEN 1 ELSE 0 END) AS null_Department
+FROM data_table;
+```
+
+5. Detecting duplicate records:
+```sql
+SELECT 
+    ID, 
+    COUNT(*) AS count 
+FROM data_table 
+GROUP BY ID 
+HAVING COUNT(*) > 1;
+```
+
+6. Identifying outliers in numerical columns (Age, Salary):
+```sql
+WITH stats AS (
+    SELECT 
+        PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY Age) AS Q1,
+        PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY Age) AS Q3
+    FROM data_table
+),
+iqr AS (
+    SELECT 
+        Q1,
+        Q3,
+        (Q3 - Q1) AS IQR
+    FROM stats
+)
+SELECT * 
+FROM data_table, iqr
+WHERE 
+    Age < (Q1 - 1.5 * IQR) OR Age > (Q3 + 1.5 * IQR);
+```
+
+7. Check for inconsistent or invalid values (simple example for Department):
+```sql
+SELECT 
+    DISTINCT Department 
+FROM data_table 
+WHERE 
+    Department NOT IN ('HR', 'IT', 'Sales', 'Marketing');
+```
+
+8. Violations of referential integrity (if foreign key relationships exist):
+-- Assuming there is a foreign key relationship with another table named 'departments':
+```sql
+SELECT 
+    dt.Department
+FROM data_table dt
+LEFT JOIN departments d ON dt.Department = d.Name
+WHERE d.Name IS NULL;
+```
+```

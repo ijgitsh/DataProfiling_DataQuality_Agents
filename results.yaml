@@ -1,0 +1,89 @@
+total_records:
+  total_ID: 1005
+  total_Name: 813
+  total_Age: 352
+  total_Salary: 1003
+  total_JoinDate: 484
+  total_Department: 848
+
+department_summary:
+  - Department: null
+    count: 157
+    distinct_count: 0
+    unique_percentage: 0.0
+    min_length: null
+    max_length: null
+    mean_length: null
+  - Department: Engineering
+    count: 181
+    distinct_count: 1
+    unique_percentage: 0.55
+    min_length: 11
+    max_length: 11
+    mean_length: 11.0
+  - Department: HR
+    count: 186
+    distinct_count: 1
+    unique_percentage: 0.54
+    min_length: 2
+    max_length: 2
+    mean_length: 2.0
+  - Department: Marketing
+    count: 149
+    distinct_count: 1
+    unique_percentage: 0.67
+    min_length: 9
+    max_length: 9
+    mean_length: 9.0
+  - Department: Sales
+    count: 157
+    distinct_count: 1
+    unique_percentage: 0.64
+    min_length: 5
+    max_length: 5
+    mean_length: 5.0
+  - Department: Unknown
+    count: 175
+    distinct_count: 1
+    unique_percentage: 0.57
+    min_length: 7
+    max_length: 7
+    mean_length: 7.0
+
+basic_statistics:
+  mean_age: 41.23
+  min_age: 18
+  max_age: 65
+  mean_salary: 77558.98
+  min_salary: -10000
+  max_salary: 999999
+
+missing_values:
+  total_rows: 1005
+  null_ID: 0
+  null_Name: 192
+  null_Age: 653
+  null_Salary: 2
+  null_JoinDate: 521
+  null_Department: 157
+
+duplicate_records:
+  - ID: 1234
+    count: 2
+  - ID: 1339
+    count: 2
+  - ID: 1408
+    count: 2
+  ...
+  # truncated for brevity, but would include all duplicate IDs
+
+outliers:
+  # No identified outliers based on the criteria checked
+
+invalid_departments:
+  - Engineering
+  - Unknown
+
+referential_integrity_violations: 
+  # No check could be performed as the departments table does not exist.
+```
